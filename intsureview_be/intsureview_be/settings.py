@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "intsureview_be.apps.api",
-    "intsureview_be.apps.users",
 ]
 
 MIDDLEWARE = [
