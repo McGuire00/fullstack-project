@@ -1,9 +1,11 @@
-import './Main.css';
+import "./Main.css";
+import { useState } from "react";
 
+import Form from "../Form/Form";
 function Main() {
   return (
     <div className="main">
-      Main
+      <Form />
     </div>
   );
 }
