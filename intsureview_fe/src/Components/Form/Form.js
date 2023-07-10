@@ -7,9 +7,21 @@ function Form() {
   const [birthday, setBirthday] = useState("");
   const [emailFrequency, setEmailFrequency] = useState("DAILY");
   const [promotionalEmail, setPromotionalEmail] = useState("True");
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!name) {
+      setNameError(true);
+      return;
+    }
+
+    if (!email) {
+      setEmailError(true);
+      return;
+    }
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -27,15 +39,50 @@ function Form() {
       requestOptions
     )
       .then((response) => {
-        return response.json();
+        // Reset form fields
+        if (response.ok) {
+          alert("Form Submitted Successfully");
+          setName("");
+          setEmail("");
+          setBirthday("");
+          setEmailFrequency("DAILY");
+          setPromotionalEmail("True");
+          setNameError(false);
+          setEmailError(false);
+        } else {
+          console.error("Error:", response.status);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
+
+    // Reset form fields
+    // setName("");
+    // setEmail("");
+    // setBirthday("");
+    // setEmailFrequency("Daily");
+    // setPromotionalEmail("True");
+    // setNameError(false);
+    // setEmailError(false);
   };
 
   function handleFrequencyChange(e) {
     setEmailFrequency(e.target.value);
+  }
+
+  function handleNameChange(e) {
+    setName(e.target.value);
+    if (nameError) {
+      setNameError(false);
+    }
+  }
+
+  function handleEmailChange(e) {
+    setEmail(e.target.value);
+    if (emailError) {
+      setEmailError(false);
+    }
   }
   return (
     <>
@@ -48,16 +95,19 @@ function Form() {
             id="name"
             name="name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleNameChange}
+            className={nameError ? "error" : ""}
           ></input>
+          {nameError && <p className="error-message">Name is required</p>}
           <label>Email: </label>
           <input
             type="text"
             id="email"
             name="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
           ></input>
+          {emailError && <p className="error-message">Email is required</p>}
           <label>Birthday: </label>
           <input
             type="date"

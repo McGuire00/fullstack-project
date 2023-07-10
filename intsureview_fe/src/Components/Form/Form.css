@@ -47,3 +47,13 @@ button[type="submit"] {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.error {
+  border: 2px solid red;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
