@@ -15,3 +15,5 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    # Django creates the GET, POST, PUT, etc for us
+
