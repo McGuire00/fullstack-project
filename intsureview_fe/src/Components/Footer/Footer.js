@@ -1,11 +1,7 @@
-import './Footer.css';
+import "./Footer.css";
 
 function Footer() {
-  return (
-    <div className="footer">
-      Footer
-    </div>
-  );
+  return <div className="footer">Copyright © Mac Goods 2023</div>;
 }
 
 export default Footer;
