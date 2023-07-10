@@ -9,6 +9,7 @@ function Form() {
   const [promotionalEmail, setPromotionalEmail] = useState("True");
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,7 +42,8 @@ function Form() {
       .then((response) => {
         // Reset form fields
         if (response.ok) {
-          alert("Form Submitted Successfully");
+          //
+          setSuccessMessage("Form submitted successfully!");
           setName("");
           setEmail("");
           setBirthday("");
@@ -50,10 +52,12 @@ function Form() {
           setNameError(false);
           setEmailError(false);
         } else {
+          setSuccessMessage("");
           console.error("Error:", response.status);
         }
       })
       .catch((error) => {
+        setSuccessMessage("");
         console.log(error);
       });
 
@@ -89,26 +93,28 @@ function Form() {
       <form className="form" onSubmit={handleSubmit}>
         {/*<Form/>*/}
         <div className="form-fields">
-          <label>Name: </label>
+          <label htmlFor="name">Name: </label>
           <input
             type="text"
             id="name"
             name="name"
             value={name}
+            placeholder="Your name"
             onChange={handleNameChange}
             className={nameError ? "error" : ""}
           ></input>
           {nameError && <p className="error-message">Name is required</p>}
-          <label>Email: </label>
+          <label htmlFor="email">Email: </label>
           <input
             type="text"
             id="email"
             name="email"
             value={email}
+            placeholder="Your email"
             onChange={handleEmailChange}
           ></input>
           {emailError && <p className="error-message">Email is required</p>}
-          <label>Birthday: </label>
+          <label htmlFor="birthday">Birthday: </label>
           <input
             type="date"
             id="birthday"
@@ -117,7 +123,7 @@ function Form() {
             onChange={(e) => setBirthday(e.target.value)}
             max="2040-12-31"
           ></input>
-          <label>Promotional Emails </label>
+          <label htmlFor="promo-email">Promotional Emails </label>
           <select
             name="promo-email"
             id="promo-email"
@@ -134,32 +140,36 @@ function Form() {
             <input
               type="radio"
               value="DAILY"
+              id="daily"
               name="frequency"
               onChange={handleFrequencyChange}
               defaultChecked={true}
-            />{" "}
-            Daily
+            />
+            <label htmlFor="daily">Daily</label>
             <input
               type="radio"
               value="WEEKLY"
-              name="frequency"
-              onChange={handleFrequencyChange}
-            />{" "}
-            Weekly
-            <input
-              type="radio"
-              value="SEMI-MONTHLY"
+              id="weekly"
               name="frequency"
               onChange={handleFrequencyChange}
             />
-            Semi-monthly
+            <label htmlFor="weekly">Weekly</label>
+            <input
+              type="radio"
+              value="SEMI-MONTHLY"
+              id="semi-monthly"
+              name="frequency"
+              onChange={handleFrequencyChange}
+            />
+            <label htmlFor="semi-monthly">Semi-monthly</label>
             <input
               type="radio"
               value="MONTHLY"
+              id="monthly"
               name="frequency"
               onChange={handleFrequencyChange}
-            />{" "}
-            Monthly
+            />
+            <label htmlFor="monthly">Monthly</label>
           </div>
 
           {/*<input type="text" id="promo-email" name="promo-email"></input>*/}
@@ -168,6 +178,7 @@ function Form() {
           Submit
         </button>
       </form>
+      {successMessage && <p className="success-message">{successMessage}</p>}
     </>
   );
 }
