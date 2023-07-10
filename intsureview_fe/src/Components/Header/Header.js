@@ -1,4 +1,4 @@
-import './Header.css';
+import "./Header.css";
 
 function Header() {
   return (
@@ -6,7 +6,6 @@ function Header() {
       <h1 className="header-title">Mac Goods</h1>
       <nav className="header-nav">
         <ul className="header-nav-list">
-          <li className="header-nav-item">Home</li>
           <li className="header-nav-item">About</li>
           <li className="header-nav-item">Services</li>
           <li className="header-nav-item">Contact</li>
