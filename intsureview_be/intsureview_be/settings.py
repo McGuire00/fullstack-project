@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "corsheaders",
     "intsureview_be.apps.api",
     "intsureview_be.apps.users",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -87,6 +89,8 @@ DATABASES = {
     }
 }
 
+CORS_ORIGIN_WHITELIST = ['http://localhost:8000']
+CORS_ORIGIN_ALLOW_ALL = True  # Cors Error before adding this part :)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
